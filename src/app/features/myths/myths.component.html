@@ -1,0 +1,57 @@
+<!-- Hero Section -->
+<section class="px-margin py-xl text-center">
+  <h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Mitos &amp; Realidades</h1>
+  <p class="font-body-sm md:font-body-md text-on-surface-variant max-w-md mx-auto">
+    Desmitificamos creencias comunes sobre nutrición con evidencia científica y claridad.
+  </p>
+</section>
+
+<!-- Filter Chips (Keep above on desktop) -->
+<section class="px-margin mb-lg hidden md:block">
+  <div class="flex flex-wrap gap-sm justify-center">
+    <button (click)="filter('')" class="px-lg py-sm rounded-full font-label-sm transition-colors active:scale-95"
+      [class.bg-primary]="!activeCategory()" [class.text-on-primary]="!activeCategory()"
+      [class.bg-secondary-container]="activeCategory()" [class.text-on-secondary-container]="activeCategory()">
+      Todos
+    </button>
+    <button (click)="filter('Carbohidratos')" class="px-lg py-sm rounded-full font-label-sm transition-colors active:scale-95"
+      [class.bg-primary]="activeCategory() === 'Carbohidratos'" [class.text-on-primary]="activeCategory() === 'Carbohidratos'"
+      [class.bg-secondary-container]="activeCategory() !== 'Carbohidratos'" [class.text-on-secondary-container]="activeCategory() !== 'Carbohidratos'">
+      Carbohidratos
+    </button>
+    <button (click)="filter('Hábitos')" class="px-lg py-sm rounded-full font-label-sm transition-colors active:scale-95"
+      [class.bg-primary]="activeCategory() === 'Hábitos'" [class.text-on-primary]="activeCategory() === 'Hábitos'"
+      [class.bg-secondary-container]="activeCategory() !== 'Hábitos'" [class.text-on-secondary-container]="activeCategory() !== 'Hábitos'">
+      Hábitos
+    </button>
+  </div>
+</section>
+
+<!-- Myths Feed (Vertical Stack on Mobile, Keep card internal behavior) -->
+<section class="px-margin pb-xl space-y-md md:space-y-lg">
+  @for (myth of myths(); track myth.id) {
+    <app-myth-card [myth]="myth" />
+  }
+</section>
+
+<!-- Filter Chips (Mobile: below cards) -->
+<section class="mt-xl pb-8 px-margin md:hidden">
+  <h2 class="font-label-lg text-label-lg text-on-background mb-md uppercase tracking-wider">Filtrar por categoría</h2>
+  <div class="flex overflow-x-auto gap-sm no-scrollbar pb-2">
+    <button (click)="filter('')" class="whitespace-nowrap px-lg py-sm rounded-full font-label-sm shadow-sm transition-transform active:scale-95"
+      [class.bg-primary]="!activeCategory()" [class.text-on-primary]="!activeCategory()"
+      [class.bg-secondary-container]="activeCategory()" [class.text-on-secondary-container]="activeCategory()">
+      Todos
+    </button>
+    <button (click)="filter('Carbohidratos')" class="whitespace-nowrap px-lg py-sm rounded-full font-label-sm hover:bg-outline-variant/30 transition-all active:scale-95"
+      [class.bg-primary]="activeCategory() === 'Carbohidratos'" [class.text-on-primary]="activeCategory() === 'Carbohidratos'"
+      [class.bg-secondary-container]="activeCategory() !== 'Carbohidratos'" [class.text-on-secondary-container]="activeCategory() !== 'Carbohidratos'">
+      Carbohidratos
+    </button>
+    <button (click)="filter('Hábitos')" class="whitespace-nowrap px-lg py-sm rounded-full font-label-sm hover:bg-outline-variant/30 transition-all active:scale-95"
+      [class.bg-primary]="activeCategory() === 'Hábitos'" [class.text-on-primary]="activeCategory() === 'Hábitos'"
+      [class.bg-secondary-container]="activeCategory() !== 'Hábitos'" [class.text-on-secondary-container]="activeCategory() !== 'Hábitos'">
+      Hábitos
+    </button>
+  </div>
+</section>

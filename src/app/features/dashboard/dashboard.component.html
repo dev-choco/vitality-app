@@ -1,0 +1,58 @@
+<!-- Hero Section -->
+<section class="px-margin pt-lg md:pt-xl pb-md md:pb-lg">
+  <h1 class="font-headline-lg text-headline-lg text-on-background mb-lg leading-tight">¿Qué vamos a cocinar hoy?</h1>
+  <app-search-bar
+    placeholder="Tengo huevo, arroz y tomate..."
+    (search)="onIngredientSearch($event)"
+  />
+</section>
+
+<!-- Goals Grid (2x2) -->
+<section class="px-margin mb-xl">
+  <div class="grid grid-cols-2 gap-sm md:gap-gutter">
+    @for (goal of goals(); track goal.slug) {
+      <app-goal-chip [goal]="goal" />
+    }
+  </div>
+</section>
+
+<!-- Quick Recipes (Horizontal Scroll) -->
+@if (quickRecipes().length) {
+  <section class="mb-xl">
+    <div class="flex items-center justify-between px-margin mb-sm md:mb-md">
+      <h2 class="font-headline-sm text-headline-sm text-on-background">Desayunos rápidos</h2>
+      <span class="font-label-sm text-primary flex items-center gap-1 cursor-pointer" (click)="router.navigate(['/recetas'])">
+        Ver todos <span class="material-symbols-outlined text-xs">chevron_right</span>
+      </span>
+    </div>
+    <div class="flex gap-md overflow-x-auto px-margin no-scrollbar">
+      @for (recipe of quickRecipes(); track recipe.id) {
+        <app-recipe-card [recipe]="recipe" variant="compact" />
+      }
+    </div>
+  </section>
+}
+
+<!-- Budget Recipes (Single Column) -->
+@if (budgetRecipes().length) {
+  <section class="mb-xl px-margin">
+    <div class="flex items-center justify-between mb-sm md:mb-md">
+      <h2 class="font-headline-sm text-headline-sm text-on-background">Almuerzos económicos</h2>
+      <span class="font-label-sm text-primary flex items-center gap-1 cursor-pointer" (click)="router.navigate(['/recetas'])">
+        Ver todos <span class="material-symbols-outlined text-xs">chevron_right</span>
+      </span>
+    </div>
+    <div class="grid grid-cols-1 gap-md">
+      @for (recipe of budgetRecipes(); track recipe.id) {
+        <app-recipe-card [recipe]="recipe" variant="horizontal" />
+      }
+    </div>
+  </section>
+}
+
+<!-- Myth Card -->
+@if (featuredMyth()) {
+  <section class="px-margin mb-xl">
+    <app-myth-card [myth]="featuredMyth()!" />
+  </section>
+}

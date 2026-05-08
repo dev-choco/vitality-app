@@ -1,0 +1,43 @@
+{
+  "name": "vitality-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "ng lint",
+    "typecheck": "ngc --noEmit"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^21.2.10",
+    "@angular/common": "^21.2.10",
+    "@angular/compiler": "^21.2.10",
+    "@angular/core": "^21.2.10",
+    "@angular/forms": "^21.2.10",
+    "@angular/platform-browser": "^21.2.10",
+    "@angular/platform-browser-dynamic": "^21.2.10",
+    "@angular/router": "^21.2.10",
+    "rxjs": "~7.8.2",
+    "tslib": "^2.8.1",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^21.2.8",
+    "@angular/cli": "^21.2.8",
+    "@angular/compiler-cli": "^21.2.10",
+    "@types/jasmine": "~5.1.7",
+    "jasmine-core": "~5.6.0",
+    "tailwindcss": "^3.4.17",
+    "postcss": "^8.5.3",
+    "autoprefixer": "^10.4.21",
+    "typescript": "~5.9.2"
+  },
+  "overrides": {
+    "postcss": "^8.5.3",
+    "webpack": "^5.98.0",
+    "body-parser": "^2.2.0"
+  }
+}

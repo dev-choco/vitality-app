@@ -1,0 +1,11 @@
+<button
+  (click)="select.emit(label)"
+  class="px-lg py-2.5 md:py-sm rounded-full font-label-sm md:font-label-lg whitespace-nowrap transition-colors active:scale-95"
+  [class.bg-primary]="active"
+  [class.text-on-primary]="active"
+  [class.shadow-sm]="active"
+  [class.bg-secondary-container]="!active"
+  [class.text-on-secondary-container]="!active"
+>
+  {{ label }}
+</button>

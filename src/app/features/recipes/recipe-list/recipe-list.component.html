@@ -1,0 +1,74 @@
+<!-- Search & Hero -->
+<section class="px-margin mb-lg space-y-md pt-20 md:pt-0">
+  <app-search-bar
+    placeholder="Buscar ingredientes..."
+    (search)="onIngredientSearch($event)"
+  />
+  <div class="flex gap-sm overflow-x-auto no-scrollbar py-1">
+    <button (click)="loadRecipes()" class="whitespace-nowrap px-4 py-2 md:px-lg md:py-sm rounded-full font-label-lg shadow-sm transition-colors"
+      [class.bg-primary]="!activeFilter()" [class.text-on-primary]="!activeFilter()"
+      [class.bg-surface-container-high]="activeFilter()" [class.text-on-surface-variant]="activeFilter()">
+      Todas
+    </button>
+    <button (click)="loadRecipes('bajar-peso')" class="whitespace-nowrap px-4 py-2 md:px-lg md:py-sm rounded-full font-label-lg transition-colors"
+      [class.bg-primary]="activeFilter() === 'bajar-peso'" [class.text-on-primary]="activeFilter() === 'bajar-peso'"
+      [class.bg-surface-container-high]="activeFilter() !== 'bajar-peso'" [class.text-on-surface-variant]="activeFilter() !== 'bajar-peso'">
+      Desayunos
+    </button>
+    <button (click)="loadRecipes('energia-diaria')" class="whitespace-nowrap px-4 py-2 md:px-lg md:py-sm rounded-full font-label-lg transition-colors"
+      [class.bg-primary]="activeFilter() === 'energia-diaria'" [class.text-on-primary]="activeFilter() === 'energia-diaria'"
+      [class.bg-surface-container-high]="activeFilter() !== 'energia-diaria'" [class.text-on-surface-variant]="activeFilter() !== 'energia-diaria'">
+      Almuerzos
+    </button>
+    <button (click)="loadRecipes(undefined, 'bajo')" class="whitespace-nowrap px-4 py-2 md:px-lg md:py-sm rounded-full font-label-lg transition-colors"
+      [class.bg-primary]="activeFilter() === 'economico'" [class.text-on-primary]="activeFilter() === 'economico'"
+      [class.bg-surface-container-high]="activeFilter() !== 'economico'" [class.text-on-surface-variant]="activeFilter() !== 'economico'">
+      Económico
+    </button>
+  </div>
+</section>
+
+<!-- Recipe Cards (Single Column Mobile, Grid Desktop) -->
+<section class="px-margin space-y-lg md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-gutter">
+  @for (recipe of recipes(); track recipe.id) {
+    <app-recipe-card [recipe]="recipe" variant="full" />
+  }
+</section>
+
+@if (!recipes().length) {
+  <p class="text-center font-body-md text-on-surface-variant py-xl">
+    No se encontraron recetas.
+  </p>
+}
+
+<!-- Plate Builder Teaser Mobile -->
+<div class="px-margin mt-xl md:mt-0 md:hidden">
+  <div class="bg-primary-container text-on-primary-container p-lg rounded-2xl shadow-md relative overflow-hidden">
+    <div class="relative z-10">
+      <h4 class="font-headline-sm mb-xs">Arma tu Plato</h4>
+      <p class="text-body-sm opacity-90 mb-md">Equilibra tus macros visualmente desde tu celular.</p>
+      <button [routerLink]="['/arma-tu-plato']" class="bg-surface-container-lowest text-primary px-6 py-2 rounded-full font-label-lg shadow-sm active:scale-95 transition-transform">Probar ahora</button>
+    </div>
+    <div class="absolute -right-2 -bottom-2 opacity-10">
+      <span class="material-symbols-outlined !text-8xl">restaurant_menu</span>
+    </div>
+  </div>
+</div>
+
+<!-- Mitos y Realidades Section Mobile -->
+<div class="mt-xl space-y-md px-margin md:hidden">
+  <div class="bg-surface-container-high rounded-2xl p-md flex flex-col border border-outline-variant">
+    <div class="flex items-center gap-2 mb-2 text-tertiary">
+      <span class="material-symbols-outlined text-lg">cancel</span>
+      <span class="font-label-sm uppercase font-bold tracking-widest">Mito</span>
+    </div>
+    <p class="font-body-md text-on-surface-variant line-through opacity-70">"Comer sano es extremadamente caro y aburrido."</p>
+  </div>
+  <div class="bg-primary text-on-primary rounded-2xl p-md flex flex-col shadow-md">
+    <div class="flex items-center gap-2 mb-2">
+      <span class="material-symbols-outlined text-lg">check_circle</span>
+      <span class="font-label-sm uppercase font-bold tracking-widest">Realidad</span>
+    </div>
+    <p class="font-body-md font-medium">Las legumbres y huevos son proteínas de alta calidad a una fracción del costo de la carne.</p>
+  </div>
+</div>

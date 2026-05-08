@@ -1,0 +1,52 @@
+<h2 class="font-headline-lg text-on-surface mb-lg text-center">Inicia sesión</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-md">
+  <div>
+    <label class="font-label-sm text-on-surface-variant block mb-xs">Email</label>
+    <input
+      formControlName="email"
+      type="email"
+      class="w-full px-md py-3 rounded-lg border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none font-body-md"
+      placeholder="tu@email.com"
+    />
+  </div>
+  <div>
+    <label class="font-label-sm text-on-surface-variant block mb-xs">Contraseña</label>
+    <input
+      formControlName="password"
+      type="password"
+      class="w-full px-md py-3 rounded-lg border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none font-body-md"
+      placeholder="••••••••"
+    />
+  </div>
+
+  @if (error) {
+    <p class="text-error font-body-sm">{{ error }}</p>
+  }
+
+  <button
+    type="submit"
+    [disabled]="form.invalid || loading"
+    class="w-full py-3 bg-primary text-on-primary rounded-xl font-label-lg active:scale-95 transition-transform disabled:opacity-50"
+  >
+    {{ loading ? 'Entrando...' : 'Entrar' }}
+  </button>
+</form>
+
+<div class="relative my-lg">
+  <div class="absolute inset-0 flex items-center">
+    <div class="w-full border-t border-outline-variant"></div>
+  </div>
+  <div class="relative flex justify-center text-sm">
+    <span class="px-4 bg-white text-on-surface-variant font-body-sm">o continúa con</span>
+  </div>
+</div>
+
+<div id="googleSignInButton" class="flex justify-center"></div>
+
+<div class="mt-lg text-center">
+  <p class="font-body-sm text-on-surface-variant">
+    ¿No tienes cuenta?
+    <a routerLink="/auth/register" class="text-primary font-semibold">Regístrate</a>
+  </p>
+</div>

@@ -1,0 +1,50 @@
+<h2 class="font-headline-lg text-on-surface mb-lg text-center">Crear cuenta</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-md">
+  <div>
+    <label class="font-label-sm text-on-surface-variant block mb-xs">Nombre</label>
+    <input
+      formControlName="name"
+      type="text"
+      class="w-full px-md py-3 rounded-lg border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none font-body-md"
+      placeholder="Tu nombre"
+    />
+  </div>
+  <div>
+    <label class="font-label-sm text-on-surface-variant block mb-xs">Email</label>
+    <input
+      formControlName="email"
+      type="email"
+      class="w-full px-md py-3 rounded-lg border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none font-body-md"
+      placeholder="tu@email.com"
+    />
+  </div>
+  <div>
+    <label class="font-label-sm text-on-surface-variant block mb-xs">Contraseña</label>
+    <input
+      formControlName="password"
+      type="password"
+      class="w-full px-md py-3 rounded-lg border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none font-body-md"
+      placeholder="Mínimo 8 caracteres"
+    />
+  </div>
+
+  @if (error) {
+    <p class="text-error font-body-sm">{{ error }}</p>
+  }
+
+  <button
+    type="submit"
+    [disabled]="form.invalid || loading"
+    class="w-full py-3 bg-primary text-on-primary rounded-xl font-label-lg active:scale-95 transition-transform disabled:opacity-50"
+  >
+    {{ loading ? 'Creando...' : 'Crear cuenta' }}
+  </button>
+</form>
+
+<div class="mt-lg text-center">
+  <p class="font-body-sm text-on-surface-variant">
+    ¿Ya tienes cuenta?
+    <a routerLink="/auth/login" class="text-primary font-semibold">Inicia sesión</a>
+  </p>
+</div>

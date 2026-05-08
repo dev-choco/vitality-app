@@ -1,0 +1,177 @@
+<div class="max-w-md mx-auto px-margin pt-lg md:pt-xl pb-32 space-y-lg md:space-y-xl">
+  <h1 class="font-headline-lg text-on-surface text-center">Arma tu Plato</h1>
+
+  <!-- Interactive Plate Section -->
+  <section class="flex flex-col items-center">
+    <div class="relative w-60 h-60 md:w-72 md:h-72 rounded-full bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] border-[8px] md:border-[12px] border-surface-container flex overflow-hidden">
+      <!-- 1/2 Veggies -->
+      <div class="absolute left-0 top-0 w-1/2 h-full border-r-2 border-dashed border-outline-variant bg-surface-container-lowest flex flex-col items-center justify-center p-2 md:p-4">
+        <span class="material-symbols-outlined text-primary text-2xl md:text-4xl mb-1 md:mb-2 opacity-20">eco</span>
+        <span class="font-label-sm text-outline uppercase tracking-widest text-[8px] md:text-[10px]">Vegetales (50%)</span>
+        @if (selectedVeggies().length) {
+          <div class="mt-1 md:mt-2 text-center">
+            <p class="font-label-sm text-primary text-[10px]">{{ selectedVeggies().join(', ') }}</p>
+          </div>
+        }
+      </div>
+      <!-- Right Side -->
+      <div class="absolute right-0 top-0 w-1/2 h-full flex flex-col">
+        <!-- 1/4 Protein -->
+        <div class="h-1/2 w-full border-b-2 border-dashed border-outline-variant bg-surface-container-low flex flex-col items-center justify-center p-2 md:p-4">
+          <span class="material-symbols-outlined text-tertiary text-xl md:text-2xl mb-0.5 md:mb-1 opacity-20">restaurant</span>
+          <span class="font-label-sm text-outline uppercase tracking-widest text-[8px] md:text-[10px]">Proteína (25%)</span>
+          @if (selectedProtein(); as p) {
+            <p class="font-label-sm text-tertiary mt-0.5 md:mt-1 text-[10px]">{{ p.name }}</p>
+          } @else {
+            <button class="mt-0.5 md:mt-1 w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-dashed border-outline-variant flex items-center justify-center text-outline">
+              <span class="material-symbols-outlined text-xs md:text-sm">add</span>
+            </button>
+          }
+        </div>
+        <!-- 1/4 Carbs -->
+        <div class="h-1/2 w-full bg-secondary-container/30 flex flex-col items-center justify-center p-2 md:p-4">
+          <span class="material-symbols-outlined text-on-secondary-container text-xl md:text-2xl mb-0.5 md:mb-1 opacity-20">bakery_dining</span>
+          <span class="font-label-sm text-outline uppercase tracking-widest text-[8px] md:text-[10px]">Carbos (25%)</span>
+          @if (selectedCarb(); as c) {
+            <p class="font-label-sm text-secondary mt-0.5 md:mt-1 text-[10px]">{{ c.name }}</p>
+          } @else {
+            <button class="mt-0.5 md:mt-1 w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-dashed border-outline-variant flex items-center justify-center text-outline">
+              <span class="material-symbols-outlined text-xs md:text-sm">add</span>
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback Box -->
+    @if (feedback().active) {
+      <div class="mt-md md:mt-lg w-full">
+        <app-feedback-banner
+          [title]="feedback().title"
+          [description]="feedback().description"
+          [variant]="feedback().variant"
+        />
+      </div>
+    }
+  </section>
+
+  <!-- Selection Menu -->
+  <section class="space-y-xl">
+    <!-- Proteínas -->
+    <div class="space-y-sm">
+      <div class="flex items-center justify-between">
+        <h3 class="font-label-lg text-tertiary flex items-center gap-xs">
+          <span class="material-symbols-outlined text-lg">restaurant</span>
+          Proteínas
+        </h3>
+        <span class="text-xs font-label-sm text-outline">Elige 1</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-sm md:gap-gutter">
+        @for (food of proteins(); track food.id) {
+          <button
+            (click)="selectProtein(food)"
+            class="flex items-center md:flex-col p-3 md:p-sm bg-white rounded-xl shadow-sm border-2 active:scale-95 transition-transform gap-md md:gap-0"
+            [class.border-tertiary]="selectedProtein()?.id === food.id"
+            [class.border-transparent]="selectedProtein()?.id !== food.id"
+          >
+            <img
+              [src]="food.imageUrl"
+              [alt]="food.name"
+              class="w-16 h-16 md:w-12 md:h-12 rounded-lg object-cover md:mb-2 shrink-0"
+              onerror="this.style.display='none'"
+            />
+            <div class="text-left md:text-center flex-1">
+              <span class="font-label-lg text-on-surface block">{{ food.name }}</span>
+              <span class="text-xs text-outline md:hidden">{{ food.primaryBenefit }}</span>
+            </div>
+            @if (selectedProtein()?.id === food.id) {
+              <span class="material-symbols-outlined text-tertiary ml-auto md:ml-0 fill-icon">check_circle</span>
+            }
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Carbohidratos -->
+    <div class="space-y-sm">
+      <div class="flex items-center justify-between">
+        <h3 class="font-label-lg text-secondary flex items-center gap-xs">
+          <span class="material-symbols-outlined text-lg">bakery_dining</span>
+          Carbohidratos
+        </h3>
+        <span class="text-xs font-label-sm text-outline">Elige 1</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-sm md:gap-gutter">
+        @for (food of carbs(); track food.id) {
+          <button
+            (click)="selectCarb(food)"
+            class="flex items-center md:flex-col p-3 md:p-sm bg-white rounded-xl shadow-sm border-2 active:scale-95 transition-transform gap-md md:gap-0"
+            [class.border-secondary]="selectedCarb()?.id === food.id"
+            [class.border-transparent]="selectedCarb()?.id !== food.id"
+          >
+            <img
+              [src]="food.imageUrl"
+              [alt]="food.name"
+              class="w-16 h-16 md:w-12 md:h-12 rounded-lg object-cover md:mb-2 shrink-0"
+              onerror="this.style.display='none'"
+            />
+            <div class="text-left md:text-center flex-1">
+              <span class="font-label-lg text-on-surface block">{{ food.name }}</span>
+              <span class="text-xs text-outline md:hidden">{{ food.primaryBenefit }}</span>
+            </div>
+            @if (selectedCarb()?.id === food.id) {
+              <span class="material-symbols-outlined text-secondary ml-auto md:ml-0 fill-icon">check_circle</span>
+            }
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Vegetales -->
+    <div class="space-y-sm">
+      <div class="flex items-center justify-between">
+        <h3 class="font-label-lg text-primary flex items-center gap-xs">
+          <span class="material-symbols-outlined text-lg">eco</span>
+          Vegetales
+        </h3>
+        <span class="text-xs font-label-sm text-outline">Elige 2 o más</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-sm md:gap-gutter">
+        @for (food of veggies(); track food.id) {
+          <button
+            (click)="toggleVeggie(food)"
+            class="flex items-center md:flex-col p-3 md:p-sm bg-white rounded-xl shadow-sm border-2 active:scale-95 transition-transform gap-md md:gap-0"
+            [class.border-primary]="isVeggieSelected(food.id)"
+            [class.border-transparent]="!isVeggieSelected(food.id)"
+          >
+            <img
+              [src]="food.imageUrl"
+              [alt]="food.name"
+              class="w-16 h-16 md:w-12 md:h-12 rounded-lg object-cover md:mb-2 shrink-0"
+              onerror="this.style.display='none'"
+            />
+            <div class="text-left md:text-center flex-1">
+              <span class="font-label-lg text-on-surface block">{{ food.name }}</span>
+              <span class="text-xs text-outline md:hidden">{{ food.primaryBenefit }}</span>
+            </div>
+            @if (isVeggieSelected(food.id)) {
+              <span class="material-symbols-outlined text-primary ml-auto md:ml-0 fill-icon">check_circle</span>
+            }
+          </button>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Save Button -->
+  <div class="fixed bottom-[72px] left-0 right-0 px-margin pb-4 z-40 bg-gradient-to-t from-surface-bright via-surface-bright/95 to-transparent pt-8 md:static md:bg-none md:pt-0 md:px-0">
+    <button
+      (click)="savePlate()"
+      [disabled]="saving()"
+      class="w-full max-w-md mx-auto md:max-w-none bg-primary-container text-on-primary-container md:bg-primary md:text-on-primary font-lexend font-semibold py-4 rounded-xl shadow-xl md:shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-sm disabled:opacity-50"
+    >
+      {{ saving() ? 'Guardando...' : 'Guardar mi Plato' }}
+      <span class="material-symbols-outlined text-lg">check</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+@if (recipe(); as item) {
+  <div class="px-margin py-xl">
+    <div class="relative h-64 md:h-80 w-full overflow-hidden rounded-2xl mb-xl bg-surface-container">
+      <img
+        [src]="item.imageUrl"
+        [alt]="item.title"
+        class="w-full h-full object-cover"
+        onerror="this.style.display='none'"
+      />
+      <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/40 to-transparent"></div>
+      <div class="absolute bottom-4 left-4 flex items-center gap-4 text-white font-label-sm">
+        <span class="flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">schedule</span>
+          {{ item.prepTimeMin }} min
+        </span>
+        @if (item.difficulty) {
+          <span>{{ item.difficulty }}</span>
+        }
+      </div>
+      @if (item.budgetTag) {
+        <div class="absolute top-4 right-4 bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-xs font-bold">
+          $ {{ item.budgetTag }}
+        </div>
+      }
+    </div>
+
+    <h1 class="font-headline-lg text-on-surface mb-sm">{{ item.title }}</h1>
+    <p class="font-body-md text-on-surface-variant mb-lg">{{ item.description }}</p>
+
+    <!-- Nutrition Grid -->
+    <div class="grid grid-cols-4 gap-md mb-xl">
+      <div class="text-center bg-surface-container rounded-xl p-md">
+        <p class="font-headline-sm text-primary">{{ item.calories }}</p>
+        <p class="font-label-sm text-on-surface-variant">Kcal</p>
+      </div>
+      <div class="text-center bg-surface-container rounded-xl p-md">
+        <p class="font-headline-sm text-primary">{{ item.proteinG }}g</p>
+        <p class="font-label-sm text-on-surface-variant">Proteína</p>
+      </div>
+      <div class="text-center bg-surface-container rounded-xl p-md">
+        <p class="font-headline-sm text-primary">{{ item.carbsG }}g</p>
+        <p class="font-label-sm text-on-surface-variant">Carbos</p>
+      </div>
+      <div class="text-center bg-surface-container rounded-xl p-md">
+        <p class="font-headline-sm text-primary">{{ item.fatG }}g</p>
+        <p class="font-label-sm text-on-surface-variant">Grasas</p>
+      </div>
+    </div>
+
+    <!-- Ingredients -->
+    @if (item.ingredients.length) {
+      <div class="mb-xl">
+        <h2 class="font-headline-sm text-on-surface mb-md">Ingredientes</h2>
+        <div class="flex flex-wrap gap-xs">
+          @for (ing of item.ingredients; track ing.foodId) {
+            <a
+              [routerLink]="['/alimentos', ing.foodSlug]"
+              class="bg-secondary-container text-on-secondary-container px-3 py-1.5 rounded text-xs font-medium uppercase tracking-wider hover:bg-surface-container-high transition-colors"
+            >
+              {{ ing.foodName }}
+              @if (ing.quantity) { {{ ing.quantity }} {{ ing.unit }} }
+            </a>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Instructions -->
+    @if (item.instructions) {
+      <div class="mb-xl">
+        <h2 class="font-headline-sm text-on-surface mb-md">Preparación</h2>
+        <p class="font-body-md text-on-surface-variant whitespace-pre-line">{{ item.instructions }}</p>
+      </div>
+    }
+
+    <!-- Goal Tags -->
+    @if (item.goalTags) {
+      <div class="flex gap-xs mb-xl">
+        @for (tag of item.goalTags.split(','); track tag) {
+          <span class="px-lg py-sm bg-surface-container-high text-on-surface-variant rounded-full font-label-sm">
+            {{ tag.trim() }}
+          </span>
+        }
+      </div>
+    }
+  </div>
+}

@@ -1,0 +1,23 @@
+<div class="w-full rounded-xl p-md flex items-center gap-md border"
+     [class.bg-surface-container-high]="variant === 'info'"
+     [class.bg-error-container]="variant === 'error'"
+     [class.bg-primary-container]="variant === 'success'"
+     [class.border-primary/10]="variant === 'info'"
+     [class.border-error/20]="variant === 'error'"
+     [class.border-primary/20]="variant === 'success'">
+  <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+       [class.bg-primary]="variant === 'success' || variant === 'info'"
+       [class.bg-error]="variant === 'error'"
+       [class.text-on-primary]="variant === 'success' || variant === 'info'"
+       [class.text-on-error]="variant === 'error'">
+    <span class="material-symbols-outlined fill-icon">{{ icon }}</span>
+  </div>
+  <div>
+    <p class="font-headline-sm"
+       [class.text-primary]="variant === 'success' || variant === 'info'"
+       [class.text-error]="variant === 'error'">{{ title }}</p>
+    @if (description) {
+      <p class="font-body-sm text-on-surface-variant">{{ description }}</p>
+    }
+  </div>
+</div>

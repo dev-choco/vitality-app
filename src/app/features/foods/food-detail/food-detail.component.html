@@ -1,0 +1,55 @@
+@if (food(); as item) {
+  <div class="px-margin py-xl">
+    <div class="relative h-64 md:h-80 w-full overflow-hidden rounded-2xl mb-xl bg-surface-container">
+      <img
+        [src]="item.imageUrl"
+        [alt]="item.name"
+        class="w-full h-full object-cover"
+        onerror="this.style.display='none'"
+      />
+    </div>
+
+    <h1 class="font-headline-lg text-on-surface mb-sm">{{ item.name }}</h1>
+    <p class="font-body-md text-on-surface-variant mb-lg">{{ item.description }}</p>
+
+    <div class="grid grid-cols-4 gap-md mb-xl">
+      <div class="text-center bg-surface-container rounded-xl p-md">
+        <p class="font-headline-sm text-primary">{{ item.caloriesPer100g }}</p>
+        <p class="font-label-sm text-on-surface-variant">Kcal</p>
+      </div>
+      <div class="text-center bg-surface-container rounded-xl p-md">
+        <p class="font-headline-sm text-primary">{{ item.proteinG }}g</p>
+        <p class="font-label-sm text-on-surface-variant">Proteína</p>
+      </div>
+      <div class="text-center bg-surface-container rounded-xl p-md">
+        <p class="font-headline-sm text-primary">{{ item.carbsG }}g</p>
+        <p class="font-label-sm text-on-surface-variant">Carbos</p>
+      </div>
+      <div class="text-center bg-surface-container rounded-xl p-md">
+        <p class="font-headline-sm text-primary">{{ item.fatG }}g</p>
+        <p class="font-label-sm text-on-surface-variant">Grasas</p>
+      </div>
+    </div>
+
+    @if (item.benefits.length) {
+      <div class="mb-xl">
+        <h2 class="font-headline-sm text-on-surface mb-md">Beneficios</h2>
+        <div class="space-y-sm">
+          @for (benefit of item.benefits; track benefit.text) {
+            <div class="flex items-center gap-sm text-primary">
+              <span class="material-symbols-outlined text-md">{{ benefit.icon }}</span>
+              <span class="font-label-lg">{{ benefit.text }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    @if (item.consumptionTips) {
+      <div class="bg-secondary-container rounded-xl p-lg">
+        <p class="font-label-sm text-tertiary uppercase tracking-wider mb-xs">Sugerencia</p>
+        <p class="font-body-md text-on-surface-variant">{{ item.consumptionTips }}</p>
+      </div>
+    }
+  </div>
+}

@@ -1,0 +1,65 @@
+<!-- Hero Section -->
+<section class="py-md md:py-xl px-margin">
+  <h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Diccionario de Beneficios</h1>
+  <p class="font-body-md text-body-md text-on-surface-variant max-w-lg">
+    Descubre cómo los alimentos reales nutren tu vitalidad.
+  </p>
+</section>
+
+<!-- Search & Filter -->
+<section class="px-margin mb-lg">
+  <app-search-bar
+    placeholder="Busca aguacates, proteínas..."
+    (search)="onSearch($event)"
+  />
+  <div class="flex gap-sm mt-md overflow-x-auto pb-2 no-scrollbar">
+    <app-category-chip label="Todos" [active]="!selectedCategory()" (select)="onCategoryFilter('')" />
+    @for (cat of categories(); track cat.id) {
+      <app-category-chip [label]="cat.name" [active]="selectedCategory() === cat.id" (select)="onCategoryFilter(cat.id)" />
+    }
+  </div>
+</section>
+
+<!-- Food Cards (Single Column Mobile) -->
+<section class="px-margin flex flex-col gap-gutter mb-12">
+  @for (food of foods(); track food.id) {
+    <app-food-card [food]="food" />
+  }
+</section>
+
+<!-- Plate Builder CTA (Mobile) -->
+<section class="px-margin mb-12">
+  <div class="bg-primary-container text-on-primary-container rounded-2xl p-lg flex flex-col justify-center items-center text-center shadow-lg">
+    <span class="material-symbols-outlined text-5xl mb-md opacity-80">restaurant_menu</span>
+    <h3 class="font-headline-sm text-headline-sm mb-sm">¿Sabes qué comer hoy?</h3>
+    <p class="font-body-sm text-body-sm mb-lg opacity-90">Usa nuestro constructor de platos para una comida equilibrada.</p>
+    <button [routerLink]="['/arma-tu-plato']" class="w-full min-h-[56px] bg-white text-primary font-label-lg rounded-xl shadow-md active:scale-95 transition-all flex items-center justify-center gap-2 uppercase tracking-wide">
+      Arma tu Plato
+      <span class="material-symbols-outlined text-lg">arrow_forward</span>
+    </button>
+  </div>
+</section>
+
+<!-- Myths Section -->
+<section class="mt-xl mb-12 px-margin">
+  <div class="flex justify-between items-center mb-lg">
+    <h2 class="font-headline-md text-headline-md text-on-surface">Mitos y Realidades</h2>
+    <button [routerLink]="['/mitos']" class="text-primary font-label-lg flex items-center gap-1 active:scale-95 transition-transform min-h-[44px]">
+      Ver todos <span class="material-symbols-outlined text-sm">arrow_forward</span>
+    </button>
+  </div>
+  <div class="flex flex-col gap-gutter">
+    <div class="flex rounded-2xl overflow-hidden shadow-sm border border-outline-variant/30 bg-surface">
+      <div class="w-1/2 bg-tertiary-fixed text-on-tertiary-fixed-variant p-lg flex flex-col justify-center items-center text-center">
+        <span class="material-symbols-outlined text-xl mb-sm">cancel</span>
+        <p class="font-label-sm uppercase mb-xs opacity-70">Mito</p>
+        <p class="font-body-sm font-semibold line-through">"Los carbohidratos engordan"</p>
+      </div>
+      <div class="w-1/2 bg-surface-container text-on-primary-fixed-variant p-lg flex flex-col justify-center items-center text-center">
+        <span class="material-symbols-outlined text-xl mb-sm">check_circle</span>
+        <p class="font-label-sm uppercase mb-xs opacity-70">Realidad</p>
+        <p class="font-body-sm font-semibold">Son el combustible vital</p>
+      </div>
+    </div>
+  </div>
+</section>
