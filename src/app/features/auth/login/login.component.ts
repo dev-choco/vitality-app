@@ -2,7 +2,7 @@ import { Component, inject, AfterViewInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
-import { environment } from '../../../../environments/environment';
+import { ConfigService } from '../../../core/services/config.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +14,7 @@ export class LoginComponent implements AfterViewInit {
   private fb = inject(FormBuilder);
   private auth = inject(AuthService);
   private router = inject(Router);
+  private config = inject(ConfigService);
 
   form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -33,7 +34,7 @@ export class LoginComponent implements AfterViewInit {
     }
 
     google.accounts.id.initialize({
-      client_id: environment.googleClientId,
+      client_id: this.config.googleClientId,
       callback: (response: any) => {
         const idToken = response.credential;
         this.loading = true;
