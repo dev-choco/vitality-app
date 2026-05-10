@@ -1,53 +1,120 @@
-<!-- Search & Hero -->
 <section class="px-margin mb-lg space-y-md pt-md">
   <app-search-bar
     placeholder="Buscar ingredientes..."
     (search)="onIngredientSearch($event)"
   />
+
+  <!-- Goal Filter -->
   <div class="flex gap-sm overflow-x-auto no-scrollbar py-1">
-    <button (click)="loadRecipes()" class="whitespace-nowrap px-4 py-2 md:px-lg md:py-sm rounded-full font-label-lg shadow-sm transition-colors"
-      [class.bg-primary]="!activeFilter()" [class.text-on-primary]="!activeFilter()"
-      [class.bg-surface-container-high]="activeFilter()" [class.text-on-surface-variant]="activeFilter()">
-      Todas
+    <button (click)="filterGoal('')" class="whitespace-nowrap px-4 py-2 rounded-full font-label-lg transition-colors active:scale-95"
+      [class.bg-primary]="!selectedGoal()" [class.text-on-primary]="!selectedGoal()"
+      [class.bg-surface-container-high]="selectedGoal()" [class.dark:bg-stone-700]="selectedGoal()"
+      [class.text-on-surface-variant]="selectedGoal()" [class.dark:text-stone-300]="selectedGoal()">
+      Todos
     </button>
-    <button (click)="loadRecipes('bajar-peso')" class="whitespace-nowrap px-4 py-2 md:px-lg md:py-sm rounded-full font-label-lg transition-colors"
-      [class.bg-primary]="activeFilter() === 'bajar-peso'" [class.text-on-primary]="activeFilter() === 'bajar-peso'"
-      [class.bg-surface-container-high]="activeFilter() !== 'bajar-peso'" [class.text-on-surface-variant]="activeFilter() !== 'bajar-peso'">
-      Desayunos
+    <button (click)="filterGoal('bajar-peso')" class="whitespace-nowrap px-4 py-2 rounded-full font-label-lg transition-colors active:scale-95"
+      [class.bg-primary]="selectedGoal() === 'bajar-peso'" [class.text-on-primary]="selectedGoal() === 'bajar-peso'"
+      [class.bg-surface-container-high]="selectedGoal() !== 'bajar-peso'" [class.dark:bg-stone-700]="selectedGoal() !== 'bajar-peso'"
+      [class.text-on-surface-variant]="selectedGoal() !== 'bajar-peso'" [class.dark:text-stone-300]="selectedGoal() !== 'bajar-peso'">
+      Bajar de peso
     </button>
-    <button (click)="loadRecipes('energia-diaria')" class="whitespace-nowrap px-4 py-2 md:px-lg md:py-sm rounded-full font-label-lg transition-colors"
-      [class.bg-primary]="activeFilter() === 'energia-diaria'" [class.text-on-primary]="activeFilter() === 'energia-diaria'"
-      [class.bg-surface-container-high]="activeFilter() !== 'energia-diaria'" [class.text-on-surface-variant]="activeFilter() !== 'energia-diaria'">
-      Almuerzos
+    <button (click)="filterGoal('subir-peso')" class="whitespace-nowrap px-4 py-2 rounded-full font-label-lg transition-colors active:scale-95"
+      [class.bg-primary]="selectedGoal() === 'subir-peso'" [class.text-on-primary]="selectedGoal() === 'subir-peso'"
+      [class.bg-surface-container-high]="selectedGoal() !== 'subir-peso'" [class.dark:bg-stone-700]="selectedGoal() !== 'subir-peso'"
+      [class.text-on-surface-variant]="selectedGoal() !== 'subir-peso'" [class.dark:text-stone-300]="selectedGoal() !== 'subir-peso'">
+      Subir de peso
     </button>
-    <button (click)="loadRecipes(undefined, 'bajo')" class="whitespace-nowrap px-4 py-2 md:px-lg md:py-sm rounded-full font-label-lg transition-colors"
-      [class.bg-primary]="activeFilter() === 'economico'" [class.text-on-primary]="activeFilter() === 'economico'"
-      [class.bg-surface-container-high]="activeFilter() !== 'economico'" [class.text-on-surface-variant]="activeFilter() !== 'economico'">
-      Económico
+    <button (click)="filterGoal('comer-economico')" class="whitespace-nowrap px-4 py-2 rounded-full font-label-lg transition-colors active:scale-95"
+      [class.bg-primary]="selectedGoal() === 'comer-economico'" [class.text-on-primary]="selectedGoal() === 'comer-economico'"
+      [class.bg-surface-container-high]="selectedGoal() !== 'comer-economico'" [class.dark:bg-stone-700]="selectedGoal() !== 'comer-economico'"
+      [class.text-on-surface-variant]="selectedGoal() !== 'comer-economico'" [class.dark:text-stone-300]="selectedGoal() !== 'comer-economico'">
+      Comer económico
+    </button>
+    <button (click)="filterGoal('energia-diaria')" class="whitespace-nowrap px-4 py-2 rounded-full font-label-lg transition-colors active:scale-95"
+      [class.bg-primary]="selectedGoal() === 'energia-diaria'" [class.text-on-primary]="selectedGoal() === 'energia-diaria'"
+      [class.bg-surface-container-high]="selectedGoal() !== 'energia-diaria'" [class.dark:bg-stone-700]="selectedGoal() !== 'energia-diaria'"
+      [class.text-on-surface-variant]="selectedGoal() !== 'energia-diaria'" [class.dark:text-stone-300]="selectedGoal() !== 'energia-diaria'">
+      Energía diaria
+    </button>
+  </div>
+
+  <!-- Budget Filter -->
+  <div class="flex gap-sm overflow-x-auto no-scrollbar py-1">
+    <button (click)="filterBudget('')" class="whitespace-nowrap px-4 py-2 rounded-full font-label-sm transition-colors active:scale-95"
+      [class.bg-tertiary]="!selectedBudget()" [class.text-on-tertiary]="!selectedBudget()"
+      [class.bg-surface-container-high]="selectedBudget()" [class.dark:bg-stone-700]="selectedBudget()"
+      [class.text-on-surface-variant]="selectedBudget()" [class.dark:text-stone-300]="selectedBudget()">
+      Todos los costos
+    </button>
+    <button (click)="filterBudget('bajo')" class="whitespace-nowrap px-4 py-2 rounded-full font-label-sm transition-colors active:scale-95"
+      [class.bg-tertiary]="selectedBudget() === 'bajo'" [class.text-on-tertiary]="selectedBudget() === 'bajo'"
+      [class.bg-surface-container-high]="selectedBudget() !== 'bajo'" [class.dark:bg-stone-700]="selectedBudget() !== 'bajo'"
+      [class.text-on-surface-variant]="selectedBudget() !== 'bajo'" [class.dark:text-stone-300]="selectedBudget() !== 'bajo'">
+      Bajo
+    </button>
+    <button (click)="filterBudget('medio')" class="whitespace-nowrap px-4 py-2 rounded-full font-label-sm transition-colors active:scale-95"
+      [class.bg-tertiary]="selectedBudget() === 'medio'" [class.text-on-tertiary]="selectedBudget() === 'medio'"
+      [class.bg-surface-container-high]="selectedBudget() !== 'medio'" [class.dark:bg-stone-700]="selectedBudget() !== 'medio'"
+      [class.text-on-surface-variant]="selectedBudget() !== 'medio'" [class.dark:text-stone-300]="selectedBudget() !== 'medio'">
+      Medio
+    </button>
+    <button (click)="filterBudget('alto')" class="whitespace-nowrap px-4 py-2 rounded-full font-label-sm transition-colors active:scale-95"
+      [class.bg-tertiary]="selectedBudget() === 'alto'" [class.text-on-tertiary]="selectedBudget() === 'alto'"
+      [class.bg-surface-container-high]="selectedBudget() !== 'alto'" [class.dark:bg-stone-700]="selectedBudget() !== 'alto'"
+      [class.text-on-surface-variant]="selectedBudget() !== 'alto'" [class.dark:text-stone-300]="selectedBudget() !== 'alto'">
+      Alto
+    </button>
+  </div>
+
+  <!-- Meal Type Filter -->
+  <div class="flex gap-sm overflow-x-auto no-scrollbar py-1">
+    <button (click)="filterMealType('')" class="whitespace-nowrap px-4 py-2 rounded-full font-label-sm transition-colors active:scale-95"
+      [class.bg-secondary]="!selectedMealType()" [class.text-on-secondary]="!selectedMealType()"
+      [class.bg-surface-container-high]="selectedMealType()" [class.dark:bg-stone-700]="selectedMealType()"
+      [class.text-on-surface-variant]="selectedMealType()" [class.dark:text-stone-300]="selectedMealType()">
+      Todo el día
+    </button>
+    <button (click)="filterMealType('desayuno')" class="whitespace-nowrap px-4 py-2 rounded-full font-label-sm transition-colors active:scale-95"
+      [class.bg-secondary]="selectedMealType() === 'desayuno'" [class.text-on-secondary]="selectedMealType() === 'desayuno'"
+      [class.bg-surface-container-high]="selectedMealType() !== 'desayuno'" [class.dark:bg-stone-700]="selectedMealType() !== 'desayuno'"
+      [class.text-on-surface-variant]="selectedMealType() !== 'desayuno'" [class.dark:text-stone-300]="selectedMealType() !== 'desayuno'">
+      Desayuno
+    </button>
+    <button (click)="filterMealType('almuerzo')" class="whitespace-nowrap px-4 py-2 rounded-full font-label-sm transition-colors active:scale-95"
+      [class.bg-secondary]="selectedMealType() === 'almuerzo'" [class.text-on-secondary]="selectedMealType() === 'almuerzo'"
+      [class.bg-surface-container-high]="selectedMealType() !== 'almuerzo'" [class.dark:bg-stone-700]="selectedMealType() !== 'almuerzo'"
+      [class.text-on-surface-variant]="selectedMealType() !== 'almuerzo'" [class.dark:text-stone-300]="selectedMealType() !== 'almuerzo'">
+      Almuerzo
+    </button>
+    <button (click)="filterMealType('cena')" class="whitespace-nowrap px-4 py-2 rounded-full font-label-sm transition-colors active:scale-95"
+      [class.bg-secondary]="selectedMealType() === 'cena'" [class.text-on-secondary]="selectedMealType() === 'cena'"
+      [class.bg-surface-container-high]="selectedMealType() !== 'cena'" [class.dark:bg-stone-700]="selectedMealType() !== 'cena'"
+      [class.text-on-surface-variant]="selectedMealType() !== 'cena'" [class.dark:text-stone-300]="selectedMealType() !== 'cena'">
+      Cena
     </button>
   </div>
 </section>
 
-<!-- Recipe Cards (Single Column Mobile, Grid Desktop) -->
-<section class="px-margin space-y-lg md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-gutter">
+<!-- Recipe Cards -->
+<section class="px-margin flex flex-col gap-6 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-gutter">
   @for (recipe of recipes(); track recipe.id) {
     <app-recipe-card [recipe]="recipe" variant="full" />
   }
 </section>
 
 @if (!recipes().length) {
-  <p class="text-center font-body-md text-on-surface-variant py-xl">
+  <p class="text-center font-body-md text-on-surface-variant dark:text-stone-400 py-xl">
     No se encontraron recetas.
   </p>
 }
 
 <!-- Plate Builder Teaser Mobile -->
 <div class="px-margin mt-xl md:mt-0 md:hidden">
-  <div class="bg-primary-container text-on-primary-container p-lg rounded-2xl shadow-md relative overflow-hidden">
+  <div class="bg-primary-container dark:bg-primary/20 text-on-primary-container dark:text-stone-100 p-lg rounded-2xl shadow-md relative overflow-hidden">
     <div class="relative z-10">
       <h4 class="font-headline-sm mb-xs">Arma tu Plato</h4>
       <p class="text-body-sm opacity-90 mb-md">Equilibra tus macros visualmente desde tu celular.</p>
-      <button [routerLink]="['/arma-tu-plato']" class="bg-surface-container-lowest text-primary px-6 py-2 rounded-full font-label-lg shadow-sm active:scale-95 transition-transform">Probar ahora</button>
+      <button [routerLink]="['/arma-tu-plato']" class="bg-surface-container-lowest dark:bg-stone-800 text-primary dark:text-primary px-6 py-2 rounded-full font-label-lg shadow-sm active:scale-95 transition-transform">Probar ahora</button>
     </div>
     <div class="absolute -right-2 -bottom-2 opacity-10">
       <span class="material-symbols-outlined !text-8xl">restaurant_menu</span>
@@ -57,12 +124,12 @@
 
 <!-- Mitos y Realidades Section Mobile -->
 <div class="mt-xl space-y-md px-margin md:hidden">
-  <div class="bg-surface-container-high rounded-2xl p-md flex flex-col border border-outline-variant">
-    <div class="flex items-center gap-2 mb-2 text-tertiary">
+  <div class="bg-surface-container-high dark:bg-stone-800 rounded-2xl p-md flex flex-col border border-outline-variant dark:border-stone-700">
+    <div class="flex items-center gap-2 mb-2 text-tertiary dark:text-tertiary">
       <span class="material-symbols-outlined text-lg">cancel</span>
       <span class="font-label-sm uppercase font-bold tracking-widest">Mito</span>
     </div>
-    <p class="font-body-md text-on-surface-variant line-through opacity-70">"Comer sano es extremadamente caro y aburrido."</p>
+    <p class="font-body-md text-on-surface-variant dark:text-stone-400 line-through opacity-70">"Comer sano es extremadamente caro y aburrido."</p>
   </div>
   <div class="bg-primary text-on-primary rounded-2xl p-md flex flex-col shadow-md">
     <div class="flex items-center gap-2 mb-2">

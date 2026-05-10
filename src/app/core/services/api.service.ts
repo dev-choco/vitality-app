@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RecipeSummary, RecipeDetail, MythSummary, MythDetail, Goal, SavedPlate, PageResponse } from '../models';
 
@@ -7,10 +7,11 @@ import { RecipeSummary, RecipeDetail, MythSummary, MythDetail, Goal, SavedPlate,
 export class ApiService {
   private http = inject(HttpClient);
 
-  getRecipes(goal?: string, budget?: string, page = 0, size = 20): Observable<PageResponse<RecipeSummary>> {
-    let params: any = { page, size };
-    if (goal) params.goal = goal;
-    if (budget) params.budget = budget;
+  getRecipes(goal?: string, budget?: string, mealType?: string, page = 0, size = 20): Observable<PageResponse<RecipeSummary>> {
+    let params = new HttpParams().set('page', page).set('size', size);
+    if (goal) params = params.set('goal', goal);
+    if (budget) params = params.set('budget', budget);
+    if (mealType) params = params.set('mealType', mealType);
     return this.http.get<PageResponse<RecipeSummary>>('recipes', { params });
   }
 

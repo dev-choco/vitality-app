@@ -27,6 +27,7 @@ export interface FoodSummary {
   name: string;
   slug: string;
   categoryName: string;
+  categoryIcon: string;
   imageUrl: string;
   primaryBenefit: string;
   consumptionSuggestion: string;

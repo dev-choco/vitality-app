@@ -1,7 +1,9 @@
 <div class="w-full rounded-xl p-md flex items-center gap-md border"
      [class.bg-surface-container-high]="variant === 'info'"
+     [class.dark:bg-stone-800]="variant === 'info'"
      [class.bg-error-container]="variant === 'error'"
      [class.bg-primary-container]="variant === 'success'"
+     [class.dark:bg-primary/20]="variant === 'success'"
      [class.border-primary/10]="variant === 'info'"
      [class.border-error/20]="variant === 'error'"
      [class.border-primary/20]="variant === 'success'">
@@ -14,10 +16,15 @@
   </div>
   <div>
     <p class="font-headline-sm"
-       [class.text-primary]="variant === 'success' || variant === 'info'"
-       [class.text-error]="variant === 'error'">{{ title }}</p>
+       [class.text-on-primary-container]="variant === 'success'"
+       [class.dark:text-stone-100]="variant === 'success'"
+       [class.text-primary]="variant === 'info'"
+       [class.text-on-error-container]="variant === 'error'">{{ title }}</p>
     @if (description) {
-      <p class="font-body-sm text-on-surface-variant">{{ description }}</p>
+      <p class="font-body-sm"
+         [class.text-on-primary-container/80]="variant === 'success'"
+         [class.dark:text-stone-300]="variant === 'success'"
+         [class.text-on-surface-variant]="variant !== 'success'">{{ description }}</p>
     }
   </div>
 </div>

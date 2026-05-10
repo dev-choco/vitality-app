@@ -17,30 +17,55 @@ export class RecipeListComponent {
   route = inject(ActivatedRoute);
 
   recipes = signal<RecipeSummary[]>([]);
-  activeFilter = signal<string | null>(null);
+  selectedGoal = signal<string>('');
+  selectedBudget = signal<string>('');
+  selectedMealType = signal<string>('');
 
   constructor() {
-    const ingredients = this.route.snapshot.queryParamMap.get('ingredients');
-    const goal = this.route.snapshot.queryParamMap.get('goal');
+    const params = this.route.snapshot.queryParamMap;
+
+    const goal = params.get('goal');
+    const budget = params.get('budget');
+    const ingredients = params.get('ingredients');
+
+    if (goal) this.selectedGoal.set(goal);
+    if (budget) this.selectedBudget.set(budget);
 
     if (ingredients) {
       this.loadByIngredients(ingredients);
-    } else if (goal) {
-      this.loadRecipes(goal);
     } else {
       this.loadRecipes();
     }
   }
 
-  loadRecipes(goal?: string, budget?: string) {
-    this.activeFilter.set(goal || budget || null);
-    this.api.getRecipes(goal, budget, 0, 50).subscribe((r) => {
+  filterGoal(goal: string) {
+    this.selectedGoal.set(goal);
+    this.loadRecipes();
+  }
+
+  filterBudget(budget: string) {
+    this.selectedBudget.set(budget);
+    this.loadRecipes();
+  }
+
+  filterMealType(mealType: string) {
+    this.selectedMealType.set(mealType);
+    this.loadRecipes();
+  }
+
+  loadRecipes() {
+    this.api.getRecipes(
+      this.selectedGoal() || undefined,
+      this.selectedBudget() || undefined,
+      this.selectedMealType() || undefined,
+      0,
+      50
+    ).subscribe((r) => {
       this.recipes.set(r.content);
     });
   }
 
   loadByIngredients(ingredients: string) {
-    this.activeFilter.set('ingredients');
     this.api.getRecipesByIngredients(ingredients, 0, 50).subscribe((r) => {
       this.recipes.set(r.content);
     });

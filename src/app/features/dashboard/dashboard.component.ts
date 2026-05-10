@@ -29,11 +29,11 @@ export class DashboardComponent {
   private loadData() {
     this.api.getGoals().subscribe((g) => this.goals.set(g));
 
-    this.api.getRecipes('energia-diaria', undefined, 0, 4).subscribe((r) => {
+    this.api.getRecipes('energia-diaria', undefined, undefined, 0, 4).subscribe((r) => {
       this.quickRecipes.set(r.content);
     });
 
-    this.api.getRecipes(undefined, 'bajo', 0, 4).subscribe((r) => {
+    this.api.getRecipes(undefined, 'bajo', undefined, 0, 4).subscribe((r) => {
       this.budgetRecipes.set(r.content);
     });
 
