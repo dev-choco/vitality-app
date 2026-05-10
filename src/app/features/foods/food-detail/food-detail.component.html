@@ -1,49 +1,44 @@
 @if (food(); as item) {
   <div class="px-margin py-xl">
-    <a routerLink="/alimentos" class="flex items-center gap-xs text-primary font-label-lg mb-md active:scale-95 transition-transform">
+    <a routerLink="/alimentos" class="flex items-center gap-xs text-primary dark:text-primary font-label-lg mb-md active:scale-95 transition-transform">
       <span class="material-symbols-outlined">arrow_back</span>
       Volver
     </a>
 
-    <div class="relative h-64 md:h-80 w-full overflow-hidden rounded-2xl mb-xl bg-surface-container">
-      <img
-        [src]="item.imageUrl"
-        [alt]="item.name"
-        class="w-full h-full object-cover"
-        onerror="this.style.display='none'"
-      />
+    <div class="relative h-64 md:h-80 w-full overflow-hidden rounded-2xl mb-xl bg-surface-container dark:bg-stone-800">
+      <img [src]="item.imageUrl" [alt]="item.name" class="w-full h-full object-cover" onerror="this.style.display='none'" />
     </div>
 
-    <h1 class="font-headline-lg text-on-surface mb-sm">{{ item.name }}</h1>
-    <p class="font-body-md text-on-surface-variant mb-lg">{{ item.description }}</p>
+    <h1 class="font-headline-lg text-on-surface dark:text-stone-200 mb-sm">{{ item.name }}</h1>
+    <p class="font-body-md text-on-surface-variant dark:text-stone-400 mb-lg">{{ item.description }}</p>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-sm md:gap-md mb-xl">
-      <div class="text-center bg-surface-container rounded-xl p-sm md:p-md">
-        <p class="font-headline-sm text-primary">{{ item.caloriesPer100g }}</p>
-        <p class="font-label-sm text-on-surface-variant">Kcal</p>
+      <div class="text-center bg-surface-container dark:bg-stone-800 rounded-xl p-sm md:p-md">
+        <p class="font-headline-sm text-primary dark:text-primary">{{ item.caloriesPer100g }}</p>
+        <p class="font-label-sm text-on-surface-variant dark:text-stone-400">Kcal</p>
       </div>
-      <div class="text-center bg-surface-container rounded-xl p-sm md:p-md">
-        <p class="font-headline-sm text-primary">{{ item.proteinG }}g</p>
-        <p class="font-label-sm text-on-surface-variant">Proteína</p>
+      <div class="text-center bg-surface-container dark:bg-stone-800 rounded-xl p-sm md:p-md">
+        <p class="font-headline-sm text-primary dark:text-primary">{{ item.proteinG }}g</p>
+        <p class="font-label-sm text-on-surface-variant dark:text-stone-400">Proteína</p>
       </div>
-      <div class="text-center bg-surface-container rounded-xl p-sm md:p-md">
-        <p class="font-headline-sm text-primary">{{ item.carbsG }}g</p>
-        <p class="font-label-sm text-on-surface-variant">Carbos</p>
+      <div class="text-center bg-surface-container dark:bg-stone-800 rounded-xl p-sm md:p-md">
+        <p class="font-headline-sm text-primary dark:text-primary">{{ item.carbsG }}g</p>
+        <p class="font-label-sm text-on-surface-variant dark:text-stone-400">Carbos</p>
       </div>
-      <div class="text-center bg-surface-container rounded-xl p-sm md:p-md">
-        <p class="font-headline-sm text-primary">{{ item.fatG }}g</p>
-        <p class="font-label-sm text-on-surface-variant">Grasas</p>
+      <div class="text-center bg-surface-container dark:bg-stone-800 rounded-xl p-sm md:p-md">
+        <p class="font-headline-sm text-primary dark:text-primary">{{ item.fatG }}g</p>
+        <p class="font-label-sm text-on-surface-variant dark:text-stone-400">Grasas</p>
       </div>
     </div>
 
     @if (item.benefits.length) {
       <div class="mb-xl">
-        <h2 class="font-headline-sm text-on-surface mb-md">Beneficios</h2>
+        <h2 class="font-headline-sm text-on-surface dark:text-stone-200 mb-md">Beneficios</h2>
         <div class="space-y-sm">
           @for (benefit of item.benefits; track benefit.text) {
-            <div class="flex items-center gap-sm text-primary">
+            <div class="flex items-center gap-sm text-primary dark:text-primary">
               <span class="material-symbols-outlined text-md">{{ benefit.icon }}</span>
-              <span class="font-label-lg">{{ benefit.text }}</span>
+              <span class="font-label-lg dark:text-stone-200">{{ benefit.text }}</span>
             </div>
           }
         </div>
@@ -51,9 +46,9 @@
     }
 
     @if (item.consumptionTips) {
-      <div class="bg-secondary-container rounded-xl p-lg">
-        <p class="font-label-sm text-tertiary uppercase tracking-wider mb-xs">Sugerencia</p>
-        <p class="font-body-md text-on-surface-variant">{{ item.consumptionTips }}</p>
+      <div class="bg-secondary-container dark:bg-stone-700 rounded-xl p-lg">
+        <p class="font-label-sm text-tertiary dark:text-tertiary uppercase tracking-wider mb-xs">Sugerencia</p>
+        <p class="font-body-md text-on-surface-variant dark:text-stone-400">{{ item.consumptionTips }}</p>
       </div>
     }
   </div>

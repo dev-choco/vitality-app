@@ -1,7 +1,7 @@
 <!-- Hero Section -->
 <section class="px-margin py-xl text-center">
-  <h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Mitos &amp; Realidades</h1>
-  <p class="font-body-sm md:font-body-md text-on-surface-variant max-w-md mx-auto">
+  <h1 class="font-headline-lg text-headline-lg text-on-surface dark:text-stone-200 mb-xs">Mitos &amp; Realidades</h1>
+  <p class="font-body-sm md:font-body-md text-on-surface-variant dark:text-stone-400 max-w-md mx-auto">
     Desmitificamos creencias comunes sobre nutrición con evidencia científica y claridad.
   </p>
 </section>
@@ -11,24 +11,27 @@
   <div class="flex overflow-x-auto gap-sm no-scrollbar pb-2 md:flex-wrap md:justify-center md:overflow-visible">
     <button (click)="filter('')" class="whitespace-nowrap px-lg py-sm rounded-full font-label-sm shadow-sm transition-transform active:scale-95"
       [class.bg-primary]="!activeCategory()" [class.text-on-primary]="!activeCategory()"
-      [class.bg-secondary-container]="activeCategory()" [class.text-on-secondary-container]="activeCategory()">
+      [class.bg-secondary-container]="activeCategory()" [class.dark:bg-stone-700]="activeCategory()"
+      [class.text-on-secondary-container]="activeCategory()" [class.dark:text-stone-300]="activeCategory()">
       Todos
     </button>
     <button (click)="filter('Carbohidratos')" class="whitespace-nowrap px-lg py-sm rounded-full font-label-sm hover:bg-outline-variant/30 transition-all active:scale-95"
       [class.bg-primary]="activeCategory() === 'Carbohidratos'" [class.text-on-primary]="activeCategory() === 'Carbohidratos'"
-      [class.bg-secondary-container]="activeCategory() !== 'Carbohidratos'" [class.text-on-secondary-container]="activeCategory() !== 'Carbohidratos'">
+      [class.bg-secondary-container]="activeCategory() !== 'Carbohidratos'" [class.dark:bg-stone-700]="activeCategory() !== 'Carbohidratos'"
+      [class.text-on-secondary-container]="activeCategory() !== 'Carbohidratos'" [class.dark:text-stone-300]="activeCategory() !== 'Carbohidratos'">
       Carbohidratos
     </button>
     <button (click)="filter('Hábitos')" class="whitespace-nowrap px-lg py-sm rounded-full font-label-sm hover:bg-outline-variant/30 transition-all active:scale-95"
       [class.bg-primary]="activeCategory() === 'Hábitos'" [class.text-on-primary]="activeCategory() === 'Hábitos'"
-      [class.bg-secondary-container]="activeCategory() !== 'Hábitos'" [class.text-on-secondary-container]="activeCategory() !== 'Hábitos'">
+      [class.bg-secondary-container]="activeCategory() !== 'Hábitos'" [class.dark:bg-stone-700]="activeCategory() !== 'Hábitos'"
+      [class.text-on-secondary-container]="activeCategory() !== 'Hábitos'" [class.dark:text-stone-300]="activeCategory() !== 'Hábitos'">
       Hábitos
     </button>
   </div>
 </section>
 
 <!-- Myths Feed -->
-<section class="px-margin pb-xl space-y-md md:space-y-lg">
+<section class="px-margin pb-xl flex flex-col gap-6">
   @for (myth of myths(); track myth.id) {
     <app-myth-card [myth]="myth" />
   }
