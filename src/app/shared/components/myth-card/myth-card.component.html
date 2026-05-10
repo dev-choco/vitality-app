@@ -1,18 +1,16 @@
-<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] overflow-hidden border border-outline-variant/30">
-  <!-- Myth Side -->
-  <div class="p-md bg-error-container/10 border-b border-outline-variant/20 md:border-b-0 md:border-r">
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] dark:shadow-[0_4px_12px_rgba(0,0,0,0.3)] overflow-hidden border border-outline-variant/30 dark:border-stone-700">
+  <div class="p-md bg-error-container/10 dark:bg-red-950/30 border-b border-outline-variant/20 dark:border-stone-700 md:border-b-0 md:border-r">
     <div class="flex items-center gap-sm mb-sm">
-      <span class="material-symbols-outlined text-error text-[20px]">cancel</span>
-      <span class="font-label-sm text-label-sm text-error uppercase tracking-widest">Mito</span>
+      <span class="material-symbols-outlined text-error dark:text-red-400 text-[20px]">cancel</span>
+      <span class="font-label-sm text-label-sm text-error dark:text-red-400 uppercase tracking-widest">Mito</span>
     </div>
-    <h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs line-through decoration-error/30 opacity-80">"{{ myth.mythText }}"</h3>
+    <h3 class="font-headline-sm text-headline-sm text-on-surface dark:text-stone-300 mb-xs line-through decoration-error/30 opacity-80">"{{ myth.mythText }}"</h3>
   </div>
-  <!-- Reality Side -->
-  <div class="p-md bg-surface-variant/20">
+  <div class="p-md bg-surface-variant/20 dark:bg-stone-800/50">
     <div class="flex items-center gap-sm mb-sm">
-      <span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
-      <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Realidad</span>
+      <span class="material-symbols-outlined text-primary dark:text-primary text-[20px]">check_circle</span>
+      <span class="font-label-sm text-label-sm text-primary dark:text-primary uppercase tracking-widest">Realidad</span>
     </div>
-    <h3 class="font-headline-sm text-headline-sm text-on-primary-fixed-variant mb-sm">"{{ myth.realityText }}"</h3>
+    <h3 class="font-headline-sm text-headline-sm text-on-primary-fixed-variant dark:text-stone-200 mb-sm">"{{ myth.realityText }}"</h3>
   </div>
 </div>

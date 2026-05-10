@@ -1,4 +1,4 @@
-import { Component, inject, AfterViewInit } from '@angular/core';
+import { Component, inject, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
@@ -10,7 +10,7 @@ import { ConfigService } from '../../../core/services/config.service';
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
 })
-export class LoginComponent implements AfterViewInit {
+export class LoginComponent implements AfterViewInit, OnDestroy {
   private fb = inject(FormBuilder);
   private auth = inject(AuthService);
   private router = inject(Router);
@@ -23,16 +23,35 @@ export class LoginComponent implements AfterViewInit {
 
   loading = false;
   error = '';
+  private pollTimer: ReturnType<typeof setInterval> | null = null;
+  private timeoutTimer: ReturnType<typeof setTimeout> | null = null;
 
   ngAfterViewInit() {
-    this.initGoogleSignIn();
+    this.waitForGoogleApi();
+  }
+
+  ngOnDestroy() {
+    if (this.pollTimer) clearInterval(this.pollTimer);
+    if (this.timeoutTimer) clearTimeout(this.timeoutTimer);
+  }
+
+  private waitForGoogleApi() {
+    let attempts = 0;
+    this.pollTimer = setInterval(() => {
+      attempts++;
+      if (typeof google !== 'undefined' && google?.accounts?.id) {
+        clearInterval(this.pollTimer!);
+        if (this.timeoutTimer) clearTimeout(this.timeoutTimer);
+        this.initGoogleSignIn();
+      }
+    }, 300);
+
+    this.timeoutTimer = setTimeout(() => {
+      if (this.pollTimer) clearInterval(this.pollTimer);
+    }, 15000);
   }
 
   private initGoogleSignIn() {
-    if (typeof google === 'undefined' || !google?.accounts?.id) {
-      return;
-    }
-
     google.accounts.id.initialize({
       client_id: this.config.googleClientId,
       callback: (response: any) => {

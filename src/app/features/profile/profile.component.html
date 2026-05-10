@@ -1,0 +1,128 @@
+<div class="flex flex-col md:flex-row min-h-[calc(100dvh-64px)]">
+  <!-- Sidebar -->
+  <aside class="w-full md:w-60 bg-surface-container-lowest dark:bg-stone-900 shadow-sm md:border-r border-outline-variant/20 dark:border-stone-700 p-lg flex flex-col gap-1 shrink-0">
+    <div class="mb-lg px-4">
+      <p class="font-headline-sm text-on-surface dark:text-stone-200">{{ user()?.name }}</p>
+      <p class="font-body-sm text-on-surface-variant dark:text-stone-400 truncate">{{ user()?.email }}</p>
+    </div>
+
+    <button
+      (click)="activeTab = 'info'"
+      class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-on-surface dark:text-stone-200 hover:bg-surface-container dark:hover:bg-stone-800"
+      [class.bg-primary/10]="activeTab === 'info'"
+      [class.text-primary]="activeTab === 'info'"
+    >
+      <span class="material-symbols-outlined text-xl">person</span>
+      Información personal
+    </button>
+    <button
+      (click)="activeTab = 'plates'"
+      class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-on-surface dark:text-stone-200 hover:bg-surface-container dark:hover:bg-stone-800"
+      [class.bg-primary/10]="activeTab === 'plates'"
+      [class.text-primary]="activeTab === 'plates'"
+    >
+      <span class="material-symbols-outlined text-xl">restaurant_menu</span>
+      Mis platos
+    </button>
+    <button
+      (click)="activeTab = 'preferences'"
+      class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-on-surface dark:text-stone-200 hover:bg-surface-container dark:hover:bg-stone-800"
+      [class.bg-primary/10]="activeTab === 'preferences'"
+      [class.text-primary]="activeTab === 'preferences'"
+    >
+      <span class="material-symbols-outlined text-xl">settings</span>
+      Preferencias
+    </button>
+  </aside>
+
+  <!-- Content -->
+  <main class="flex-1 p-xl">
+    @switch (activeTab) {
+      <!-- Personal Info -->
+      @case ('info') {
+        <h2 class="font-headline-md text-on-surface dark:text-stone-200 mb-lg">Información personal</h2>
+        <div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-xl space-y-lg max-w-lg">
+          <div>
+            <p class="font-label-sm text-on-surface-variant dark:text-stone-400 uppercase tracking-wider mb-xs">Nombre</p>
+            <p class="font-body-lg text-on-surface dark:text-stone-200">{{ user()?.name }}</p>
+          </div>
+          <div>
+            <p class="font-label-sm text-on-surface-variant dark:text-stone-400 uppercase tracking-wider mb-xs">Correo electrónico</p>
+            <p class="font-body-lg text-on-surface dark:text-stone-200">{{ user()?.email }}</p>
+          </div>
+        </div>
+      }
+
+      <!-- My Plates -->
+      @case ('plates') {
+        <h2 class="font-headline-md text-on-surface dark:text-stone-200 mb-lg">Mis platos</h2>
+        @if (plates().length) {
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter max-w-2xl">
+            @for (plate of plates(); track plate.id) {
+              <div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-lg border border-outline-variant/20 dark:border-stone-700 space-y-md">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-full bg-primary-container dark:bg-primary/20 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-on-primary-container dark:text-primary">restaurant_menu</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="font-label-lg text-on-surface dark:text-stone-200">
+                      @if (plate.protein) { {{ plate.protein.name }} }
+                      @if (plate.carb) { + {{ plate.carb.name }} }
+                    </p>
+                    <p class="font-body-sm text-on-surface-variant dark:text-stone-400">
+                      {{ plate.veggieNames }}
+                    </p>
+                  </div>
+                </div>
+                @if (plate.notes) {
+                  <p class="font-body-sm text-on-surface-variant dark:text-stone-400 italic">"{{ plate.notes }}"</p>
+                }
+                <p class="font-label-sm text-outline dark:text-stone-500">{{ plate.createdAt | date : 'mediumDate' }}</p>
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="text-center py-xl">
+            <span class="material-symbols-outlined text-6xl text-outline dark:text-stone-600 mb-md opacity-50">restaurant_menu</span>
+            <p class="font-body-lg text-on-surface-variant dark:text-stone-400">Aún no has guardado ningún plato.</p>
+            <a routerLink="/arma-tu-plato" class="inline-block mt-lg bg-primary text-on-primary px-6 py-3 rounded-xl font-label-lg active:scale-95 transition-transform">
+              Arma tu primer plato
+            </a>
+          </div>
+        }
+      }
+
+      <!-- Preferences -->
+      @case ('preferences') {
+        <h2 class="font-headline-md text-on-surface dark:text-stone-200 mb-lg">Preferencias</h2>
+
+        <div class="max-w-lg">
+          <h3 class="font-label-lg text-on-surface dark:text-stone-200 uppercase tracking-wider mb-md">Modo oscuro</h3>
+          <div class="space-y-sm">
+            @for (option of themeModes; track option.value) {
+              <label
+                (click)="theme.setMode(option.value)"
+                class="flex items-center gap-4 p-lg bg-surface-container-lowest dark:bg-stone-900 rounded-2xl cursor-pointer border-2 transition-colors active:scale-[0.99]"
+                [class.border-primary]="theme.mode() === option.value"
+                [class.border-transparent]="theme.mode() !== option.value"
+              >
+                <input
+                  type="radio"
+                  name="themeMode"
+                  [value]="option.value"
+                  [checked]="theme.mode() === option.value"
+                  class="sr-only"
+                />
+                <span class="material-symbols-outlined text-2xl text-on-surface dark:text-stone-200">{{ option.icon }}</span>
+                <span class="font-label-lg text-on-surface dark:text-stone-200">{{ option.label }}</span>
+                @if (theme.mode() === option.value) {
+                  <span class="material-symbols-outlined text-primary ml-auto fill-icon">check_circle</span>
+                }
+              </label>
+            }
+          </div>
+        </div>
+      }
+    }
+  </main>
+</div>

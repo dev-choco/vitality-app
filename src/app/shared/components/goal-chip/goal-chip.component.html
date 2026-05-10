@@ -1,7 +1,7 @@
 <a
   [routerLink]="['/recetas']"
   [queryParams]="{ goal: goal.slug }"
-  class="flex flex-col items-center justify-center p-md md:p-lg bg-surface-container rounded-xl shadow-sm border border-outline-variant/20 hover:bg-surface-variant transition-colors active:scale-95 duration-150 cursor-pointer"
+  class="flex flex-col items-center justify-center p-md md:p-lg bg-surface-container dark:bg-stone-800 rounded-xl shadow-sm border border-outline-variant/20 dark:border-stone-700 hover:bg-surface-variant dark:hover:bg-stone-700 transition-colors active:scale-95 duration-150 cursor-pointer"
 >
   <div
     class="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center mb-2 md:mb-sm"
@@ -14,5 +14,5 @@
   >
     <span class="material-symbols-outlined text-xl">{{ goal.icon }}</span>
   </div>
-  <span class="font-label-lg text-label-sm md:text-label-lg text-on-surface text-center">{{ goal.name }}</span>
+  <span class="font-label-lg text-label-sm md:text-label-lg text-on-surface dark:text-stone-200 text-center">{{ goal.name }}</span>
 </a>

@@ -23,6 +23,7 @@ export const routes: Routes = [
       { path: 'recetas/:slug', loadComponent: () => import('./features/recipes/recipe-detail/recipe-detail.component').then(m => m.RecipeDetailComponent) },
       { path: 'arma-tu-plato', loadComponent: () => import('./features/plate-builder/plate-builder.component').then(m => m.PlateBuilderComponent) },
       { path: 'mitos', loadComponent: () => import('./features/myths/myths.component').then(m => m.MythsComponent) },
+      { path: 'perfil', loadComponent: () => import('./features/profile/profile.component').then(m => m.ProfileComponent) },
     ],
   },
   { path: '**', redirectTo: '' },

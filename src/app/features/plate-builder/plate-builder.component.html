@@ -1,41 +1,37 @@
 <div class="max-w-md mx-auto px-margin pt-lg md:pt-xl pb-32 space-y-lg md:space-y-xl">
-  <h1 class="font-headline-lg text-on-surface text-center">Arma tu Plato</h1>
+  <h1 class="font-headline-lg text-on-surface dark:text-stone-200 text-center">Arma tu Plato</h1>
 
   <!-- Interactive Plate Section -->
   <section class="flex flex-col items-center">
-    <div class="relative w-60 h-60 md:w-72 md:h-72 rounded-full bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] border-[8px] md:border-[12px] border-surface-container flex overflow-hidden">
-      <!-- 1/2 Veggies -->
-      <div class="absolute left-0 top-0 w-1/2 h-full border-r-2 border-dashed border-outline-variant bg-surface-container-lowest flex flex-col items-center justify-center p-2 md:p-4">
-        <span class="material-symbols-outlined text-primary text-2xl md:text-4xl mb-1 md:mb-2 opacity-20">eco</span>
-        <span class="font-label-sm text-outline uppercase tracking-widest text-[8px] md:text-[10px]">Vegetales (50%)</span>
+    <div class="relative w-60 h-60 md:w-72 md:h-72 rounded-full bg-white dark:bg-stone-800 shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.3)] border-[8px] md:border-[12px] border-surface-container dark:border-stone-700 flex overflow-hidden">
+      <div class="absolute left-0 top-0 w-1/2 h-full border-r-2 border-dashed border-outline-variant dark:border-stone-600 bg-surface-container-lowest dark:bg-stone-800 flex flex-col items-center justify-center p-2 md:p-4">
+        <span class="material-symbols-outlined text-primary dark:text-primary text-2xl md:text-4xl mb-1 md:mb-2 opacity-20">eco</span>
+        <span class="font-label-sm text-outline dark:text-stone-400 uppercase tracking-widest text-[8px] md:text-[10px]">Vegetales (50%)</span>
         @if (selectedVeggies().length) {
           <div class="mt-1 md:mt-2 text-center">
-            <p class="font-label-sm text-primary text-[10px]">{{ selectedVeggies().join(', ') }}</p>
+            <p class="font-label-sm text-primary dark:text-primary text-[10px]">{{ selectedVeggies().join(', ') }}</p>
           </div>
         }
       </div>
-      <!-- Right Side -->
       <div class="absolute right-0 top-0 w-1/2 h-full flex flex-col">
-        <!-- 1/4 Protein -->
-        <div class="h-1/2 w-full border-b-2 border-dashed border-outline-variant bg-surface-container-low flex flex-col items-center justify-center p-2 md:p-4">
-          <span class="material-symbols-outlined text-tertiary text-xl md:text-2xl mb-0.5 md:mb-1 opacity-20">restaurant</span>
-          <span class="font-label-sm text-outline uppercase tracking-widest text-[8px] md:text-[10px]">Proteína (25%)</span>
+        <div class="h-1/2 w-full border-b-2 border-dashed border-outline-variant dark:border-stone-600 bg-surface-container-low dark:bg-stone-800 flex flex-col items-center justify-center p-2 md:p-4">
+          <span class="material-symbols-outlined text-tertiary dark:text-tertiary text-xl md:text-2xl mb-0.5 md:mb-1 opacity-20">restaurant</span>
+          <span class="font-label-sm text-outline dark:text-stone-400 uppercase tracking-widest text-[8px] md:text-[10px]">Proteína (25%)</span>
           @if (selectedProtein(); as p) {
-            <p class="font-label-sm text-tertiary mt-0.5 md:mt-1 text-[10px]">{{ p.name }}</p>
+            <p class="font-label-sm text-tertiary dark:text-tertiary mt-0.5 md:mt-1 text-[10px]">{{ p.name }}</p>
           } @else {
-            <button class="mt-0.5 md:mt-1 w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-dashed border-outline-variant flex items-center justify-center text-outline">
+            <button class="mt-0.5 md:mt-1 w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-dashed border-outline-variant dark:border-stone-500 flex items-center justify-center text-outline dark:text-stone-400">
               <span class="material-symbols-outlined text-xs md:text-sm">add</span>
             </button>
           }
         </div>
-        <!-- 1/4 Carbs -->
-        <div class="h-1/2 w-full bg-secondary-container/30 flex flex-col items-center justify-center p-2 md:p-4">
-          <span class="material-symbols-outlined text-on-secondary-container text-xl md:text-2xl mb-0.5 md:mb-1 opacity-20">bakery_dining</span>
-          <span class="font-label-sm text-outline uppercase tracking-widest text-[8px] md:text-[10px]">Carbos (25%)</span>
+        <div class="h-1/2 w-full bg-secondary-container/30 dark:bg-stone-700/30 flex flex-col items-center justify-center p-2 md:p-4">
+          <span class="material-symbols-outlined text-on-secondary-container dark:text-stone-400 text-xl md:text-2xl mb-0.5 md:mb-1 opacity-20">bakery_dining</span>
+          <span class="font-label-sm text-outline dark:text-stone-400 uppercase tracking-widest text-[8px] md:text-[10px]">Carbos (25%)</span>
           @if (selectedCarb(); as c) {
-            <p class="font-label-sm text-secondary mt-0.5 md:mt-1 text-[10px]">{{ c.name }}</p>
+            <p class="font-label-sm text-secondary dark:text-stone-300 mt-0.5 md:mt-1 text-[10px]">{{ c.name }}</p>
           } @else {
-            <button class="mt-0.5 md:mt-1 w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-dashed border-outline-variant flex items-center justify-center text-outline">
+            <button class="mt-0.5 md:mt-1 w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-dashed border-outline-variant dark:border-stone-500 flex items-center justify-center text-outline dark:text-stone-400">
               <span class="material-symbols-outlined text-xs md:text-sm">add</span>
             </button>
           }
@@ -43,7 +39,6 @@
       </div>
     </div>
 
-    <!-- Feedback Box -->
     @if (feedback().active) {
       <div class="mt-md md:mt-lg w-full">
         <app-feedback-banner
@@ -55,107 +50,88 @@
     }
   </section>
 
-  <!-- Selection Menu -->
   <section class="space-y-xl">
-    <!-- Proteínas -->
     <div class="space-y-sm">
       <div class="flex items-center justify-between">
-        <h3 class="font-label-lg text-tertiary flex items-center gap-xs">
+        <h3 class="font-label-lg text-tertiary dark:text-tertiary flex items-center gap-xs">
           <span class="material-symbols-outlined text-lg">restaurant</span>
           Proteínas
         </h3>
-        <span class="text-xs font-label-sm text-outline">Elige 1</span>
+        <span class="text-xs font-label-sm text-outline dark:text-stone-400">Elige 1</span>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-sm md:gap-gutter">
         @for (food of proteins(); track food.id) {
           <button
             (click)="selectProtein(food)"
-            class="flex items-center md:flex-col p-3 md:p-sm bg-white rounded-xl shadow-sm border-2 active:scale-95 transition-transform gap-md md:gap-0"
+            class="flex items-center md:flex-col p-3 md:p-sm bg-white dark:bg-stone-900 rounded-xl shadow-sm border-2 active:scale-95 transition-transform gap-md md:gap-0"
             [class.border-tertiary]="selectedProtein()?.id === food.id"
             [class.border-transparent]="selectedProtein()?.id !== food.id"
           >
-            <img
-              [src]="food.imageUrl"
-              [alt]="food.name"
-              class="w-16 h-16 md:w-12 md:h-12 rounded-lg object-cover md:mb-2 shrink-0"
-              onerror="this.style.display='none'"
-            />
+            <img [src]="food.imageUrl" [alt]="food.name" class="w-16 h-16 md:w-12 md:h-12 rounded-lg object-cover md:mb-2 shrink-0" onerror="this.style.display='none'" />
             <div class="text-left md:text-center flex-1">
-              <span class="font-label-lg text-on-surface block">{{ food.name }}</span>
-              <span class="text-xs text-outline md:hidden">{{ food.primaryBenefit }}</span>
+              <span class="font-label-lg text-on-surface dark:text-stone-200 block">{{ food.name }}</span>
+              <span class="text-xs text-outline dark:text-stone-400 md:hidden">{{ food.primaryBenefit }}</span>
             </div>
             @if (selectedProtein()?.id === food.id) {
-              <span class="material-symbols-outlined text-tertiary ml-auto md:ml-0 fill-icon">check_circle</span>
+              <span class="material-symbols-outlined text-tertiary dark:text-tertiary ml-auto md:ml-0 fill-icon">check_circle</span>
             }
           </button>
         }
       </div>
     </div>
 
-    <!-- Carbohidratos -->
     <div class="space-y-sm">
       <div class="flex items-center justify-between">
-        <h3 class="font-label-lg text-secondary flex items-center gap-xs">
+        <h3 class="font-label-lg text-secondary dark:text-stone-300 flex items-center gap-xs">
           <span class="material-symbols-outlined text-lg">bakery_dining</span>
           Carbohidratos
         </h3>
-        <span class="text-xs font-label-sm text-outline">Elige 1</span>
+        <span class="text-xs font-label-sm text-outline dark:text-stone-400">Elige 1</span>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-sm md:gap-gutter">
         @for (food of carbs(); track food.id) {
           <button
             (click)="selectCarb(food)"
-            class="flex items-center md:flex-col p-3 md:p-sm bg-white rounded-xl shadow-sm border-2 active:scale-95 transition-transform gap-md md:gap-0"
+            class="flex items-center md:flex-col p-3 md:p-sm bg-white dark:bg-stone-900 rounded-xl shadow-sm border-2 active:scale-95 transition-transform gap-md md:gap-0"
             [class.border-secondary]="selectedCarb()?.id === food.id"
             [class.border-transparent]="selectedCarb()?.id !== food.id"
           >
-            <img
-              [src]="food.imageUrl"
-              [alt]="food.name"
-              class="w-16 h-16 md:w-12 md:h-12 rounded-lg object-cover md:mb-2 shrink-0"
-              onerror="this.style.display='none'"
-            />
+            <img [src]="food.imageUrl" [alt]="food.name" class="w-16 h-16 md:w-12 md:h-12 rounded-lg object-cover md:mb-2 shrink-0" onerror="this.style.display='none'" />
             <div class="text-left md:text-center flex-1">
-              <span class="font-label-lg text-on-surface block">{{ food.name }}</span>
-              <span class="text-xs text-outline md:hidden">{{ food.primaryBenefit }}</span>
+              <span class="font-label-lg text-on-surface dark:text-stone-200 block">{{ food.name }}</span>
+              <span class="text-xs text-outline dark:text-stone-400 md:hidden">{{ food.primaryBenefit }}</span>
             </div>
             @if (selectedCarb()?.id === food.id) {
-              <span class="material-symbols-outlined text-secondary ml-auto md:ml-0 fill-icon">check_circle</span>
+              <span class="material-symbols-outlined text-secondary dark:text-stone-300 ml-auto md:ml-0 fill-icon">check_circle</span>
             }
           </button>
         }
       </div>
     </div>
 
-    <!-- Vegetales -->
     <div class="space-y-sm">
       <div class="flex items-center justify-between">
-        <h3 class="font-label-lg text-primary flex items-center gap-xs">
+        <h3 class="font-label-lg text-primary dark:text-primary flex items-center gap-xs">
           <span class="material-symbols-outlined text-lg">eco</span>
           Vegetales
         </h3>
-        <span class="text-xs font-label-sm text-outline">Elige 2 o más</span>
+        <span class="text-xs font-label-sm text-outline dark:text-stone-400">Elige 2 o más</span>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-sm md:gap-gutter">
         @for (food of veggies(); track food.id) {
           <button
             (click)="toggleVeggie(food)"
-            class="flex items-center md:flex-col p-3 md:p-sm bg-white rounded-xl shadow-sm border-2 active:scale-95 transition-transform gap-md md:gap-0"
+            class="flex items-center md:flex-col p-3 md:p-sm bg-white dark:bg-stone-900 rounded-xl shadow-sm border-2 active:scale-95 transition-transform gap-md md:gap-0"
             [class.border-primary]="isVeggieSelected(food.id)"
             [class.border-transparent]="!isVeggieSelected(food.id)"
           >
-            <img
-              [src]="food.imageUrl"
-              [alt]="food.name"
-              class="w-16 h-16 md:w-12 md:h-12 rounded-lg object-cover md:mb-2 shrink-0"
-              onerror="this.style.display='none'"
-            />
+            <img [src]="food.imageUrl" [alt]="food.name" class="w-16 h-16 md:w-12 md:h-12 rounded-lg object-cover md:mb-2 shrink-0" onerror="this.style.display='none'" />
             <div class="text-left md:text-center flex-1">
-              <span class="font-label-lg text-on-surface block">{{ food.name }}</span>
-              <span class="text-xs text-outline md:hidden">{{ food.primaryBenefit }}</span>
+              <span class="font-label-lg text-on-surface dark:text-stone-200 block">{{ food.name }}</span>
+              <span class="text-xs text-outline dark:text-stone-400 md:hidden">{{ food.primaryBenefit }}</span>
             </div>
             @if (isVeggieSelected(food.id)) {
-              <span class="material-symbols-outlined text-primary ml-auto md:ml-0 fill-icon">check_circle</span>
+              <span class="material-symbols-outlined text-primary dark:text-primary ml-auto md:ml-0 fill-icon">check_circle</span>
             }
           </button>
         }
@@ -163,8 +139,7 @@
     </div>
   </section>
 
-  <!-- Save Button -->
-  <div class="fixed bottom-[88px] left-0 right-0 px-margin pb-4 z-40 bg-gradient-to-t from-surface-bright via-surface-bright/95 to-transparent pt-8 md:static md:bg-none md:pt-0 md:px-0">
+  <div class="fixed bottom-[88px] left-0 right-0 px-margin pb-4 z-40 bg-gradient-to-t from-surface-bright dark:from-stone-950 via-surface-bright/95 dark:via-stone-950/95 to-transparent pt-8 md:static md:bg-none md:pt-0 md:px-0">
     <button
       (click)="savePlate()"
       [disabled]="saving()"

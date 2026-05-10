@@ -18,8 +18,42 @@
     <button class="text-stone-500 dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors active:scale-95 duration-200 p-2 rounded-full min-w-[44px] min-h-[44px] flex items-center justify-center">
       <span class="material-symbols-outlined">notifications</span>
     </button>
-    <button class="text-stone-500 dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors active:scale-95 duration-200 p-2 rounded-full min-w-[44px] min-h-[44px] flex items-center justify-center">
-      <span class="material-symbols-outlined">account_circle</span>
-    </button>
+
+    <div class="relative account-menu-container">
+      <button
+        (click)="toggleMenu()"
+        class="text-stone-500 dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors active:scale-95 duration-200 p-2 rounded-full min-w-[44px] min-h-[44px] flex items-center justify-center"
+        [class.bg-primary/10]="showMenu"
+        [class.text-primary]="showMenu"
+      >
+        <span class="material-symbols-outlined">account_circle</span>
+      </button>
+      @if (showMenu) {
+        <div
+          class="absolute right-0 top-full mt-2 w-56 bg-white dark:bg-stone-800 rounded-xl shadow-xl border border-outline-variant/20 dark:border-stone-700 py-2 z-50"
+          (click)="$event.stopPropagation()"
+        >
+          <div class="px-4 py-3 border-b border-outline-variant/20 dark:border-stone-700">
+            <p class="font-label-lg text-on-surface dark:text-stone-200">{{ auth.currentUser()?.name }}</p>
+            <p class="font-body-sm text-on-surface-variant dark:text-stone-400 truncate">{{ auth.currentUser()?.email }}</p>
+          </div>
+          <a
+            routerLink="/perfil"
+            (click)="closeMenu()"
+            class="flex items-center gap-3 px-4 py-3 hover:bg-surface-container dark:hover:bg-stone-700 transition-colors text-sm text-on-surface dark:text-stone-200"
+          >
+            <span class="material-symbols-outlined text-xl">person</span>
+            Mi perfil
+          </a>
+          <button
+            (click)="logout()"
+            class="flex items-center gap-3 px-4 py-3 hover:bg-surface-container dark:hover:bg-stone-700 transition-colors text-sm text-error dark:text-red-400 w-full text-left"
+          >
+            <span class="material-symbols-outlined text-xl">logout</span>
+            Cerrar sesión
+          </button>
+        </div>
+      }
+    </div>
   </div>
 </header>

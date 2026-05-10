@@ -5,7 +5,9 @@
   [class.text-on-primary]="active"
   [class.shadow-sm]="active"
   [class.bg-secondary-container]="!active"
+  [class.dark:bg-stone-800]="!active"
   [class.text-on-secondary-container]="!active"
+  [class.dark:text-stone-300]="!active"
 >
   {{ label }}
 </button>

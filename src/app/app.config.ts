@@ -5,8 +5,9 @@ import { routes } from './app.routes';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { apiUrlInterceptor } from './core/interceptors/api-url.interceptor';
 import { ConfigService } from './core/services/config.service';
+import { ThemeService } from './core/services/theme.service';
 
-function initializeApp(config: ConfigService) {
+function initializeApp(config: ConfigService, theme: ThemeService) {
   return (): Promise<void> => config.load();
 }
 
@@ -18,7 +19,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
-      deps: [ConfigService],
+      deps: [ConfigService, ThemeService],
       multi: true,
     },
   ],
