@@ -1,5 +1,10 @@
 @if (recipe(); as item) {
   <div class="px-margin py-xl">
+    <a routerLink="/recetas" class="flex items-center gap-xs text-primary font-label-lg mb-md active:scale-95 transition-transform">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Volver
+    </a>
+
     <div class="relative h-64 md:h-80 w-full overflow-hidden rounded-2xl mb-xl bg-surface-container">
       <img
         [src]="item.imageUrl"
@@ -27,27 +32,25 @@
     <h1 class="font-headline-lg text-on-surface mb-sm">{{ item.title }}</h1>
     <p class="font-body-md text-on-surface-variant mb-lg">{{ item.description }}</p>
 
-    <!-- Nutrition Grid -->
-    <div class="grid grid-cols-4 gap-md mb-xl">
-      <div class="text-center bg-surface-container rounded-xl p-md">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-sm md:gap-md mb-xl">
+      <div class="text-center bg-surface-container rounded-xl p-sm md:p-md">
         <p class="font-headline-sm text-primary">{{ item.calories }}</p>
         <p class="font-label-sm text-on-surface-variant">Kcal</p>
       </div>
-      <div class="text-center bg-surface-container rounded-xl p-md">
+      <div class="text-center bg-surface-container rounded-xl p-sm md:p-md">
         <p class="font-headline-sm text-primary">{{ item.proteinG }}g</p>
         <p class="font-label-sm text-on-surface-variant">Proteína</p>
       </div>
-      <div class="text-center bg-surface-container rounded-xl p-md">
+      <div class="text-center bg-surface-container rounded-xl p-sm md:p-md">
         <p class="font-headline-sm text-primary">{{ item.carbsG }}g</p>
         <p class="font-label-sm text-on-surface-variant">Carbos</p>
       </div>
-      <div class="text-center bg-surface-container rounded-xl p-md">
+      <div class="text-center bg-surface-container rounded-xl p-sm md:p-md">
         <p class="font-headline-sm text-primary">{{ item.fatG }}g</p>
         <p class="font-label-sm text-on-surface-variant">Grasas</p>
       </div>
     </div>
 
-    <!-- Ingredients -->
     @if (item.ingredients.length) {
       <div class="mb-xl">
         <h2 class="font-headline-sm text-on-surface mb-md">Ingredientes</h2>
@@ -65,7 +68,6 @@
       </div>
     }
 
-    <!-- Instructions -->
     @if (item.instructions) {
       <div class="mb-xl">
         <h2 class="font-headline-sm text-on-surface mb-md">Preparación</h2>
@@ -73,7 +75,6 @@
       </div>
     }
 
-    <!-- Goal Tags -->
     @if (item.goalTags) {
       <div class="flex gap-xs mb-xl">
         @for (tag of item.goalTags.split(','); track tag) {

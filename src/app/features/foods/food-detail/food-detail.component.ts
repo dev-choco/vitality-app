@@ -1,11 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FoodService } from '../../../core/services/food.service';
 import { FoodDetail } from '../../../core/models';
 
 @Component({
   selector: 'app-food-detail',
   standalone: true,
+  imports: [RouterLink],
   templateUrl: './food-detail.component.html',
 })
 export class FoodDetailComponent {

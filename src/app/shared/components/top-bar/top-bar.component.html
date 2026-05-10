@@ -1,6 +1,20 @@
 <header class="fixed top-0 z-50 w-full h-16 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md border-b border-stone-100 dark:border-stone-800 shadow-sm flex justify-between items-center px-5">
-  <a routerLink="/" class="text-xl font-bold text-emerald-800 dark:text-emerald-300 font-lexend tracking-tight">Vitality</a>
-  <div class="flex items-center gap-2">
+  <a routerLink="/" class="text-xl font-bold text-emerald-800 dark:text-emerald-300 font-lexend tracking-tight shrink-0">Vitality</a>
+
+  <nav class="hidden md:flex items-center gap-1">
+    @for (item of navItems; track item.route) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="text-primary bg-primary/10 rounded-lg"
+        [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+        class="px-3 py-2 rounded-lg text-sm font-lexend font-medium text-stone-500 dark:text-stone-400 hover:text-primary hover:bg-primary/5 transition-colors"
+      >
+        {{ item.label }}
+      </a>
+    }
+  </nav>
+
+  <div class="flex items-center gap-2 shrink-0">
     <button class="text-stone-500 dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors active:scale-95 duration-200 p-2 rounded-full min-w-[44px] min-h-[44px] flex items-center justify-center">
       <span class="material-symbols-outlined">notifications</span>
     </button>
